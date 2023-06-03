@@ -1,0 +1,229 @@
+<html>
+  <head>
+    <link rel="shortcut icon" href="../assets/pictures/nxoUIlO8UDhIdNTTMMB2n75llA8__o3DGI_bpuiLUNw_VQRWfkALaoF1Itb2feA8iKzAjIVJccAzuBfxfVEIz3F2 (1).png" type="image/png">
+    <title>Language Courses</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/programs.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/eca852dc4e.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="../js/script.js"></script>
+</head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a href="../index.html" class="link"><h3 class="log">Language Courses</h3>
+          <img class="icon" src="../assets/pictures/nxoUIlO8UDhIdNTTMMB2n75llA8__o3DGI_bpuiLUNw_VQRWfkALaoF1Itb2feA8iKzAjIVJccAzuBfxfVEIz3F2 (1).png" alt="logo"> 
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse topnav" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item upper">
+              <a class="link" href="../html/program.html">Programs</a>
+            </li>
+            <li class="nav-item upper">
+              <a class="link active" href="../html/about.html">About Us</a>
+            </li>
+            <li class="nav-item upper">
+              <a class="link" href="#contacts">Contacts</a>
+            </li>
+            <li class="nav-item upper">
+             
+              
+              <a href="javascript:void(0);" id="openRegistrationForm">Sign up</a>
+              
+
+
+            </li>
+            <li class="nav-item upper">
+              <a id="openLoginForm"  onclick="openLoginForm()">Log in</a>
+            </li>
+          </ul>
+          
+        </div>
+        
+      </div>
+    </nav>
+    <form id="registrationForm" style="display: none;">
+      <h2>Регистрация</h2>  <a class="regclose" onclick="closeRegistrationForm()"><i class="fa fa-times" aria-hidden="true"></i></a>
+      <input type="text" id="username" placeholder="Name" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <label for="isAdmin">Administrator</label><input type="checkbox" id="isAdmin"> 
+      <button type="submit">Sign up</button>
+    </form>
+    
+
+<form id="loginForm" style="display: none;">
+<h2>Вход</h2>
+<a class="logclose" onclick="closeLoginForm()"><i class="fa fa-times" aria-hidden="true"></i></a>
+<input type="text" id="username" placeholder="Username" required>
+<input type="password" id="password" placeholder="Password" required>
+<button type="submit">Log in</button>
+</form>
+    <script>
+      
+
+function openLoginForm() {
+  var registrationForm = document.getElementById("registrationForm");
+  var loginForm = document.getElementById("loginForm");
+
+  registrationForm.style.display = "none";
+  loginForm.style.display = "block";
+}
+
+function closeLoginForm() {
+  var loginForm = document.getElementById("loginForm");
+  loginForm.style.display = "none";
+}
+const registrationForm = document.getElementById("registrationForm");
+const openRegistrationFormLink = document.getElementById("openRegistrationForm");
+const loginForm = document.getElementById("loginForm");
+
+openRegistrationFormLink.addEventListener("click", function(e) {
+  e.preventDefault();
+  registrationForm.style.display = "block";
+  loginForm.style.display = "none";
+});
+      registrationForm.addEventListener("submit", function(e) {
+e.preventDefault(); // Отменяем отправку формы
+
+// Получаем значения полей ввода
+const username = document.getElementById("username").value;
+const password = document.getElementById("password").value;
+const isAdmin = document.getElementById("isAdmin").checked;
+
+// Создаем объект пользователя или администратора
+const user = {
+username: username,
+password: password,
+isAdmin: isAdmin
+};
+
+// Получаем массив существующих пользователей из локального хранилища (если есть)
+const users = JSON.parse(localStorage.getItem("users")) || [];
+
+// Добавляем нового пользователя в массив
+users.push(user);
+
+// Сохраняем обновленный массив пользователей в локальном хранилище
+localStorage.setItem("users", JSON.stringify(users));
+
+// Очищаем поля формы
+document.getElementById("username").value = "";
+document.getElementById("password").value = "";
+document.getElementById("isAdmin").checked = false;
+
+// Выводим сообщение об успешной регистрации
+alert("Регистрация прошла успешно!");
+
+// Скрываем форму после регистрации
+registrationForm.style.display = "none";
+});
+function closeRegistrationForm() {
+var registrationForm = document.getElementById("registrationForm");
+registrationForm.style.display = "none";
+}   </script>
+    <div id="about1">
+        
+<div id="coaches">
+
+<div class="container">
+  <h1>Our Teachers</h1>
+  <div id="myCarousel" class="carousel slide container-over" data-ride="carousel">
+    <!-- Индикаторы карусели -->
+    <ul class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ul>
+
+    <!-- Слайды карусели -->
+    <div class="carousel-inner ">
+      <div class="carousel-item active ">
+        <img src="../assets/pictures/1rep.webp" class="d-block w-100" alt="Slide 1">
+        <div class="carousel-caption d-none d-md-block overlay">
+          <div class="text-over">
+            <h5>Marina</h5>
+          <a>english tutor</a>
+          </div>
+          
+        </div>
+      </div>
+      <div class="carousel-item ">
+        <img src="../assets/pictures/shutterstock_721118458-_1_.jpg" class="d-block w-100" alt="Slide 2">
+        <div class="carousel-caption d-none d-md-block overlay">
+          <div class="text-over">
+            <h5>Nastya</h5>
+          <a>german tutor</a>
+          </div>
+          
+        </div>
+      </div>
+      <div class="carousel-item ">
+        <img src="../assets/pictures/7v8CALRXgCOj5Wj66iTvd341XMfId2Pj3vYkNNvn9ulxeY6-kf8sBpGsVfPVuS2LuCfsrZ7Y.jpg" class="d-block w-100" alt="Slide 3">
+        <div class="carousel-caption d-none d-md-block overlay">
+          <div class="text-over">
+            <h5>Ludmila</h5>
+          <a>english tutor</a>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Кнопки управления каруселью -->
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Назад</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Вперед</span>
+    </a>
+  </div>
+</div></div> 
+<div style="position:relative;overflow:hidden;" class="map" >
+        <h2>Our address</h2>
+        <p>Astana, Uly Dala Avenue, 7</p>
+        <iframe src="https://yandex.kz/map-widget/v1/?ll=71.415592%2C51.098017&mode=search&oid=202726622833&ol=biz&sctx=ZAAAAAgBEAAaKAoSCQMLYMrA2lFAEdaryOiAjklAEhIJvM%2Fx0eKMkT8RBtUGJ6Jfez8iBgABAgMEBSgKOABAowFIAWoCa3qdAc3MTD2gAQCoAQC9Ab8zshXCAYcBi4SZ%2BaEC8YzLm%2FMFg6ixjqsDouvdiM8ErZ%2BQ3xOVhtaX2AGon832jQOx%2FPHluQHGvOyr9wHcz6CakAbnkryttAGU4OeFXsjYk836ApK0pLLeBonDh%2BkFsOnO%2B5MG6t74vpwBssa9iaoFyrK%2Fy9QCndrqyJIEyujl15wE4sSK%2FM8DsaPks8gB6gEA8gEA%2BAEAggIb0Y%2FQt9GL0LrQvtCy0YvQtSDQutGD0YDRgdGLigIJMTg0MTA2MTYwkgIAmgIMZGVza3RvcC1tYXBzqgIyMjE2NzgwMzIwNjg0LDE0MDkyMTY2NjM1NCw0MTUxNjU0Mjg4NCwyMDk2NzMxMDQ2NTE%3D&sll=71.415592%2C51.098017&sspn=0.009313%2C0.003633&text=%D1%8F%D0%B7%D1%8B%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5%20%D0%BA%D1%83%D1%80%D1%81%D1%8B&z=17.21" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe>
+    </div>
+    <div class="about"><h1>About our school</h1>
+      <p>Welcome to our online language school in Astana! We offer a wide range of language courses that will help you achieve high results in language learning.</p>
+  <p>Our school has been providing language education for several years and we are proud of our teachers who have high achievements in their field. We have a large team of qualified teachers who have experience teaching languages not only in Astana, but also beyond its borders. We believe that highly qualified teachers are the key factor in successful language learning.</p>
+<p>We offer a convenient format of learning that allows our students to choose the time and place for classes. Our courses are available online, which allows our students to learn languages from anywhere in the world.</p>
+<p>We offer courses for all levels of language proficiency, from beginners to advanced. Our courses are aimed at developing speaking, writing, reading, and listening skills, as well as developing grammatical and lexical knowledge.</p>
+<p>We also offer online testing, which will help determine your language proficiency level and select the appropriate course. We strive to make language learning as accessible and effective as possible for our students.</p>
+<p>Contact us today to learn more about our courses and how they can help you achieve success in language learning. Our team is ready to answer all your questions and help you choose the right course for you!</p></div>
+    </div>
+    <footer id="contacts">
+           
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 col-lg-4 col-xl-3">
+            <h4>Contact Us:</h4>
+            <h6>Phone number: +123456</h6>
+            <h6>Address: Some Place Avenue</h6>
+            <img><span></span>
+          </div>
+          <div class="col-12 col-lg-8 col-xl-9" id="footer">
+            <h4 style="margin: 20px;">Social networks:</h4>
+            <a class="social" href="https://www.instagram.com/preply"><img class="icon" src="../assets/icons/instagram.webp" alt="instagram"><span class="text">Instagram</span></a>
+            <a class="social" href="https://www.facebook.com/preply/"><img class="icon" src="../assets/icons/facebook.webp" alt="facebook"><span class="text">Facebook</span></a>
+            <a class="social" href="https://www.youtube.com/user/preplysite"><img class="icon" src="../assets/icons/youtube.webp" alt="youtube"><span class="text">YouTube</span></a>
+            <a class="social" href="https://www.linkedin.com/company/preply/"><img class="icon" src="../assets/icons/linkedin.webp" alt="linkedin"><span class="text">Linkedin</span></a>
+            <a class="social" href="https://www.tiktok.com/@preplyglobal"><img class="icon" src="../assets/icons/tiktok.webp" alt="tiktok"><span class="text">TikTok</span></a>
+          </div>
+        
+      </div>
+      <p>&copy; 2023 Language Courses</p>
+      </footer>
+    </body>
+  </html>

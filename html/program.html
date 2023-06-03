@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="../assets/pictures/nxoUIlO8UDhIdNTTMMB2n75llA8__o3DGI_bpuiLUNw_VQRWfkALaoF1Itb2feA8iKzAjIVJccAzuBfxfVEIz3F2 (1).png" type="image/png">
+    <title>Language Courses</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script src="../js/script.js"></script>
+    <script
+      src="https://kit.fontawesome.com/eca852dc4e.js"
+      crossorigin="anonymous"
+    ></script>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" integrity="sha512-W6DoySR+8Flv6Wy0c3qyJduGw+CU8kEC0JHcC7M5aeY0MEgib+O9zrr5eJbQ2d62gk8r5r5oE4aQ2Zmz4/4h4g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      .card {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card-img-top {
+        width: 100%;
+        height: auto;
+      }
+
+      .card-body {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        transform: translateY(100%);
+        transition: transform 0.3s;
+      }
+
+      .card:hover .card-body {
+        transform: translateY(0);
+      }
+
+      .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .card-text {
+        margin-bottom: 10px;
+      }
+
+      .btn-primary {
+        display: block;
+        margin-top: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a href="../index.html" class="link">
+          <h3 class="log">Language Courses</h3>
+          <img class="icon" src="../assets/pictures/nxoUIlO8UDhIdNTTMMB2n75llA8__o3DGI_bpuiLUNw_VQRWfkALaoF1Itb2feA8iKzAjIVJccAzuBfxfVEIz3F2 (1).png" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse topnav" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item upper">
+              <a class="link active" href="../html/program.html">Programs</a>
+            </li>
+            <li class="nav-item upper">
+              <a class="link" href="../html/about.html">About Us</a>
+            </li>
+            <li class="nav-item upper">
+              <a class="link" href="#contacts">Contacts</a>
+            </li>
+            <li class="nav-item upper">
+             
+              
+              <a href="javascript:void(0);" id="openRegistrationForm">Sign up</a>
+              
+
+
+            </li>
+            <li class="nav-item upper">
+              <a id="openLoginForm"  onclick="openLoginForm()">Log in</a>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+    </nav>
+      
+    <form id="registrationForm" style="display: none;">
+      <h2>Регистрация</h2>  <a class="regclose" onclick="closeRegistrationForm()"><i class="fa fa-times" aria-hidden="true"></i></a>
+      <input type="text" id="username" placeholder="Name" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <label for="isAdmin">Administrator</label><input type="checkbox" id="isAdmin"> 
+      <button type="submit">Sign up</button>
+    </form>
+    
+
+<form id="loginForm" style="display: none;">
+<h2>Вход</h2>
+<a class="logclose" onclick="closeLoginForm()"><i class="fa fa-times" aria-hidden="true"></i></a>
+<input type="text" id="username" placeholder="Username" required>
+<input type="password" id="password" placeholder="Password" required>
+<button type="submit">Log in</button>
+</form>
+    <script>
+ 
+
+function openLoginForm() {
+  var registrationForm = document.getElementById("registrationForm");
+  var loginForm = document.getElementById("loginForm");
+
+  registrationForm.style.display = "none";
+  loginForm.style.display = "block";
+}
+
+function closeLoginForm() {
+  var loginForm = document.getElementById("loginForm");
+  loginForm.style.display = "none";
+}
+const registrationForm = document.getElementById("registrationForm");
+const openRegistrationFormLink = document.getElementById("openRegistrationForm");
+const loginForm = document.getElementById("loginForm");
+
+openRegistrationFormLink.addEventListener("click", function(e) {
+  e.preventDefault();
+  registrationForm.style.display = "block";
+  loginForm.style.display = "none";
+});
+      registrationForm.addEventListener("submit", function(e) {
+e.preventDefault(); // Отменяем отправку формы
+
+// Получаем значения полей ввода
+const username = document.getElementById("username").value;
+const password = document.getElementById("password").value;
+const isAdmin = document.getElementById("isAdmin").checked;
+
+// Создаем объект пользователя или администратора
+const user = {
+username: username,
+password: password,
+isAdmin: isAdmin
+};
+
+// Получаем массив существующих пользователей из локального хранилища (если есть)
+const users = JSON.parse(localStorage.getItem("users")) || [];
+
+// Добавляем нового пользователя в массив
+users.push(user);
+
+// Сохраняем обновленный массив пользователей в локальном хранилище
+localStorage.setItem("users", JSON.stringify(users));
+
+// Очищаем поля формы
+document.getElementById("username").value = "";
+document.getElementById("password").value = "";
+document.getElementById("isAdmin").checked = false;
+
+// Выводим сообщение об успешной регистрации
+alert("Регистрация прошла успешно!");
+
+// Скрываем форму после регистрации
+registrationForm.style.display = "none";
+});
+function closeRegistrationForm() {
+var registrationForm = document.getElementById("registrationForm");
+registrationForm.style.display = "none";
+}   </script>
+    <div id="prog">
+      <div class="container">
+        <h1>Our Courses</h1>
+        <div class="row">
+          <div class="col-md-6 col-sm-12" id="card">
+            <div class="card">
+              <img class="card-img-top" src="../assets/pictures/det.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">German language</h5>
+                <p class="card-text">Learning German can be highly beneficial for both personal and professional reasons. German is one of the most widely spoken languages in Europe and is the official language of Germany, Austria, and Switzerland. With a rich cultural heritage and strong economic presence, Germany is an attractive destination for study and work.</p>
+                <a href="#" class="btn btn-primary">Learn More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12" id="card">
+            <div class="card">
+              <img class="card-img-top" src="../assets/pictures/chines.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Chinese language</h5>
+                <p class="card-text">Mandarin Chinese is the most widely spoken language in the world and is the official language of China, Taiwan, and Singapore. China's economic growth and increasing global influence make Mandarin Chinese a valuable language to learn.</p>
+                <a href="#" class="btn btn-primary">Learn More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12" id="card">
+           
+            <div class="card">
+              <img class="card-img-top" src="../assets/pictures/engl.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">English language</h5>
+                <p class="card-text">English is the most widely spoken language in the world and is considered the global language of business, education, and communication.
+                  Whether you're a student, a professional, or a traveler, learning English can help you communicate with people from all over the world.</p>
+                  <a href="#" class="btn btn-primary">Learn More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12" id="card">
+            <div class="card">
+              <img class="card-img-top" src="../assets/pictures/kaz.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Kazakh language</h5>
+                <p class="card-text">Kazakh is the official language of Kazakhstan and is also spoken in neighboring countries such as Russia and China. 
+                  Learning Kazakh can help you connect with the Kazakh culture, heritage, and people. With a growing economy and strategic location,
+                   Kazakhstan offers a unique opportunity for business and cultural exchange.
+                   A Kazakh language course can help you develop language skills, cultural awareness, and personal connections.</p>
+                <a href="#" class="btn btn-primary">Learn More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   <div class="testeng"> <button onclick=" startGame();" class="but">Start</button>
+    <div id="game-container">
+     
+      <p id="question"></p>
+      <div id="options">
+        <button onclick="checkAnswer(0) " class="gamebut"></button>
+        <button onclick="checkAnswer(1)"class="gamebut"></button>
+        <button onclick="checkAnswer(2)"class="gamebut"></button>
+        <button onclick="checkAnswer(3)"class="gamebut"></button>
+      </div>
+      <p id="result"></p>
+      <p id="score">Scores: <span id="score-value">0</span></p>
+      <p id="progress">Progress: <span id="progress-value">0</span>/10</p>
+      <p id="level">English level: <span id="level-value">Beginner</span></p>
+    </div>
+</div>
+    <script>var score = 0;
+      var progress = 0;
+      var level = "Beginner";
+      var currentQuestion = 0;
+      
+      var questions = [
+        {
+          question: "What is the capital of France?",
+          options: ["Paris", "London", "Berlin", "Rome"],
+          answer: 0
+        },
+        {
+          question: "Which language is spoken in Brazil?",
+          options: ["Spanish", "Portuguese", "Italian", "English"],
+          answer: 1
+        },
+        {
+          question: "Who painted the Mona Lisa?",
+          options: ["Vincent van Gogh", "Leonardo da Vinci", "Pablo Picasso", "Michelangelo"],
+          answer: 1
+        },
+        {
+          question: "What is the largest ocean in the world?",
+          options: ["Atlantic Ocean", " Indian Ocean", " Arctic Ocean", "Pacific Ocean"],
+          answer: 3
+        },
+        {
+          question: "Who wrote the play Romeo and Juliet?",
+          options: [" William Shakespeare", "Charles Dickens", " Jane Austen", "Mark Twain"],
+          answer: 0
+        },
+        {
+          question: "What is the currency of Japan?",
+          options: [" Yen", "Euro", " Dollar", "Pound"],
+          answer: 0
+        },
+        {
+          question: "What is the tallest mountain in the world?",
+          options: [" Mount Kilimanjaro", "Mount Everest", " Mount Fuji", "Mount McKinley"],
+          answer: 1
+        },
+        {
+          question: "Which country is known for its tulips and windmills?",
+          options: ["Germany", "Italy", "France", "Netherlands"],
+          answer: 3
+        },
+        {
+          question: "How many planets are there in our solar system?",
+          options: ["7", "9", "8", "6"],
+          answer: 2
+        },
+        {
+          question: "What is the error in this sentence: 'I goed to the store.'?",
+          options: ["goed", "the", "store", "No error"],
+          answer: 0
+        }
+      ];
+      
+      function startGame() {
+        showQuestion();
+      }
+      
+      function showQuestion() {
+        var questionElement = document.getElementById("question");
+        var optionsElements = document.getElementById("options").getElementsByTagName("button");
+        
+        if (currentQuestion < questions.length) {
+          questionElement.innerHTML = questions[currentQuestion].question;
+          
+          for (var i = 0; i < optionsElements.length; i++) {
+            optionsElements[i].innerHTML = questions[currentQuestion].options[i];
+          }
+        } else {
+          questionElement.innerHTML = "The game is over!";
+          disableOptions();
+        }
+      }
+      
+      function checkAnswer(selectedOption) {
+        var resultElement = document.getElementById("result");
+        
+        if (currentQuestion < questions.length) {
+          var correctAnswer = questions[currentQuestion].answer;
+          
+          if (selectedOption === correctAnswer) {
+            resultElement.innerHTML = "Right!";
+            score++;
+            progress++;
+          } else {
+            resultElement.innerHTML = "Wrong!";
+            progress++;
+          }
+          
+          currentQuestion++;
+          updateScore();
+          updateProgress();
+          showQuestion();
+        }
+      }
+      
+      function updateScore() {
+        var scoreElement = document.getElementById("score-value");
+        scoreElement.innerHTML = score;
+      }
+      
+      function updateProgress() {
+        var progressElement = document.getElementById("progress-value");
+        progressElement.innerHTML = progress;
+        
+        if (progress === 10) {
+          level = "Advanced";
+        } else if (progress === 5) {
+          level = "Average";
+        }
+        
+        var levelElement = document.getElementById("level-value");
+        levelElement.innerHTML = level;
+      }
+      
+      function disableOptions() {
+        var optionsElements = document.getElementById("options").getElementsByTagName("button");
+        
+        for (var i = 0; i < optionsElements.length; i++) {
+          optionsElements[i].disabled = true;
+        }
+      }
+      
+     </script>
+    <footer id="contacts">
+           
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 col-lg-4 col-xl-3">
+            <h4>Contact Us:</h4>
+            <h6>Phone number: +123456</h6>
+            <h6>Address: Some Place Avenue</h6>
+            <img><span></span>
+          </div>
+          <div class="col-12 col-lg-8 col-xl-9" id="footer">
+            <h4 style="margin: 20px;">Social networks:</h4>
+            <a class="social" href="https://www.instagram.com/preply"><img class="icon" src="../assets/icons/instagram.webp" alt="instagram"><span class="text">Instagram</span></a>
+            <a class="social" href="https://www.facebook.com/preply/"><img class="icon" src="../assets/icons/facebook.webp" alt="facebook"><span class="text">Facebook</span></a>
+            <a class="social" href="https://www.youtube.com/user/preplysite"><img class="icon" src="../assets/icons/youtube.webp" alt="youtube"><span class="text">YouTube</span></a>
+            <a class="social" href="https://www.linkedin.com/company/preply/"><img class="icon" src="../assets/icons/linkedin.webp" alt="linkedin"><span class="text">Linkedin</span></a>
+            <a class="social" href="https://www.tiktok.com/@preplyglobal"><img class="icon" src="../assets/icons/tiktok.webp" alt="tiktok"><span class="text">TikTok</span></a>
+          </div>
+        
+      </div>
+      <p>&copy; 2023 Language Courses</p>
+      </footer>
+  </body>
+</html>

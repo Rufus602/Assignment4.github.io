@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+  <head> <link rel="shortcut icon" href="./assets/pictures/nxoUIlO8UDhIdNTTMMB2n75llA8__o3DGI_bpuiLUNw_VQRWfkALaoF1Itb2feA8iKzAjIVJccAzuBfxfVEIz3F2 (1).png" type="image/png">
+    <title>Language Courses</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/eca852dc4e.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="js/script.js"></script>
+
+</head>
+  <body>
+    <audio id="click-sound">
+      <source src="./assets/audio/play.mp3" type="audio/mpeg">
+      <!-- Добавьте дополнительные источники звука для поддержки разных форматов -->
+  </audio>
+    <div id="popup">
+      <p>Мы используем файлы cookie для улучшения функциональности и предоставления персонализированного контента. Нажмите "Accept", чтобы продолжить, или "Close", чтобы отказаться.</p>
+      <button onclick="acceptCookies()">Accept</button>
+      <button onclick="closePopup()">Close</button>
+    </div>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a href="./index.html" class="link"><h3 class="log">Language Courses</h3>
+          <img class="icon" src="./assets/pictures/nxoUIlO8UDhIdNTTMMB2n75llA8__o3DGI_bpuiLUNw_VQRWfkALaoF1Itb2feA8iKzAjIVJccAzuBfxfVEIz3F2 (1).png" alt="logo"> 
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse topnav" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item upper">
+              <a class="link" href="./html/program.html">Programs</a>
+            </li>
+            <li class="nav-item upper">
+              <a class="link" href="./html/about.html">About Us</a>
+            </li>
+            <li class="nav-item upper">
+              <a class="link" href="#contacts">Contacts</a>
+            </li>
+            <li class="nav-item upper">
+             
+              
+              <a href="javascript:void(0);" id="openRegistrationForm">Sign up</a>
+              
+
+
+            </li>
+            <li class="nav-item upper">
+              <a id="openLoginForm"  onclick="openLoginForm()">Log in</a>
+            </li>
+          </ul>
+          
+        </div>
+        
+      </div>
+    </nav>
+    
+    <div class="banner">
+      <h1>Learn a New Language Today</h1>
+      <p>Join our language courses and expand your horizons</p>
+    </div>
+    <div class="main"> 
+        <div class="row" id="infr"><div class="col-sm-12 col-lg-6">
+          <div id="myForm">
+            <h1>Start learning languages with us</h1>
+            <input type="text" id="nameInput" class="inp" placeholder="Name" required>
+            <input type="tel" id="phoneInput" class="inp" placeholder="Phone number" required>
+            <input type="email" id="emailInput" class="inp" placeholder="E-mail" required>
+            <button  class = " but"onclick="updateContent()">Submit</button>
+<div id="notification"></div>
+          </div>
+          <div id="successMessage" class="hidden">
+            Your form has been successfully submitted!
+          </div>
+          </div>
+          <form id="registrationForm" style="display: none;">
+            <h2>Регистрация</h2>  <a class="regclose" onclick="closeRegistrationForm()"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <input type="text" id="username" placeholder="Name" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <label for="isAdmin">Administrator</label><input type="checkbox" id="isAdmin"> 
+            <button type="submit">Sign up</button>
+          </form>
+          
+
+<form id="loginForm" style="display: none;">
+  <h2>Вход</h2>
+  <a class="logclose" onclick="closeLoginForm()"><i class="fa fa-times" aria-hidden="true"></i></a>
+  <input type="text" id="username" placeholder="Username" required>
+  <input type="password" id="password" placeholder="Password" required>
+  <button type="submit">Log in</button>
+</form>
+
+          
+          
+          <script>
+            
+
+function openLoginForm() {
+  var registrationForm = document.getElementById("registrationForm");
+  var loginForm = document.getElementById("loginForm");
+
+  registrationForm.style.display = "none";
+  loginForm.style.display = "block";
+}
+
+function closeLoginForm() {
+  var loginForm = document.getElementById("loginForm");
+  loginForm.style.display = "none";
+}
+const registrationForm = document.getElementById("registrationForm");
+const openRegistrationFormLink = document.getElementById("openRegistrationForm");
+const loginForm = document.getElementById("loginForm");
+
+openRegistrationFormLink.addEventListener("click", function(e) {
+  e.preventDefault();
+  registrationForm.style.display = "block";
+  loginForm.style.display = "none";
+});
+            registrationForm.addEventListener("submit", function(e) {
+  e.preventDefault(); // Отменяем отправку формы
+
+  // Получаем значения полей ввода
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const isAdmin = document.getElementById("isAdmin").checked;
+
+  // Создаем объект пользователя или администратора
+  const user = {
+    username: username,
+    password: password,
+    isAdmin: isAdmin
+  };
+
+  // Получаем массив существующих пользователей из локального хранилища (если есть)
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
+  // Добавляем нового пользователя в массив
+  users.push(user);
+
+  // Сохраняем обновленный массив пользователей в локальном хранилище
+  localStorage.setItem("users", JSON.stringify(users));
+
+  // Очищаем поля формы
+  document.getElementById("username").value = "";
+  document.getElementById("password").value = "";
+  document.getElementById("isAdmin").checked = false;
+
+  // Выводим сообщение об успешной регистрации
+  alert(username+" Registration was successful!");
+
+  // Скрываем форму после регистрации
+  registrationForm.style.display = "none";
+});
+function closeRegistrationForm() {
+  var registrationForm = document.getElementById("registrationForm");
+  registrationForm.style.display = "none";
+}   
+
+          </script>
+
+          <div class="col-sm-12 col-lg-6" id="list">
+            <ul class="list">
+              <li>Improve your English skills with our online courses!</li>
+              <li>Take your English to the next level with our expert instructors.</li>
+              <li>Join our online school and learn English from the comfort of your own home.</li>
+              <li>Get personalized attention and guidance from our experienced teachers.</li>
+              <li>Achieve fluency in English with our interactive and engaging courses.</li>
+            </ul>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <h2>So what are you waiting for? Invest in your future and join our language school today. We guarantee you'll see results!</h2>
+              <p>Learning a new language can be a challenging journey, but we're here to support you every step of the way. At our language school, we guarantee that our courses will provide you with the knowledge and skills you need to succeed. Our experienced instructors use proven teaching methods to help you achieve your language learning goals, whether you're a beginner or an advanced learner.</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4"><iframe width=100% height=80% src="https://www.youtube.com/embed/If1XYDuGdu8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+          </div>
+        <div class="row" id="info">
+      <div class="col-sm-12 col-md-6 col-lg-5">
+        <h2>About Our Training Programs</h2>
+        <p>Our language courses are designed to help you achieve your language goals. We offer a wide range of courses for beginners, intermediate learners, and advanced speakers. Our courses are taught by experienced teachers who are passionate about language learning.</p>
+        <ul>
+          <li>Beginner courses</li>
+          <li>Intermediate courses</li>
+          <li>Advanced courses</li>
+          <li>Conversation classes</li>
+          <li>Exam preparation courses</li>
+        </ul>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <h2>Group Schedules</h2>
+        <ul>
+          <li>Monday-Friday: 9am-12pm</li>
+          <li>Monday-Friday: 2pm-5pm</li>
+          <li>Monday-Wednesday: 6pm-8pm</li>
+          <li>Saturday-Sunday: 10am-1pm</li>
+        </ul>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-3 ">
+        <h2>Prices</h2>
+        <ul>
+          <li>Beginner courses: $300</li>
+          <li>Intermediate courses: $400</li>
+          <li>Advanced courses: $500</li>
+          <li>Conversation classes: $50 per session</li>
+          <li>Exam preparation courses: $600</li>
+        </ul>
+      </div></div></div>
+      
+        
+      
+        
+      <div class="test">
+
+      </div>       
+      
+    
+    <div class="order-testing">
+      <h2 onclick="startLoadingAnimation(event)" >Take Testing via the Internet </h2>
+      
+      <p>Not sure which course is right for you? Take our online language proficiency test to find out.</p>
+      <button  class="but" onclick="test(event)">Take the Test</button>
+    </div>
+    <footer id="contacts">
+        
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 col-lg-4 col-xl-3">
+            <h4>Contact Us:</h4>
+            <h6>Phone number: +123456</h6>
+            <h6>Address: Some Place Avenue</h6>
+            <img><span></span>
+          </div>
+          <div class="col-12 col-lg-8 col-xl-9" id="footer">
+            <h4 style="margin: 20px;">Social networks:</h4>
+            <a class="social" href="https://www.instagram.com/preply"><img class="icon" src="./assets/icons/instagram.webp" alt="instagram"><span class="text">Instagram</span></a>
+            <a class="social" href="https://www.facebook.com/preply/"><img class="icon" src="./assets/icons/facebook.webp" alt="facebook"><span class="text">Facebook</span></a>
+            <a class="social" href="https://www.youtube.com/user/preplysite"><img class="icon" src="./assets/icons/youtube.webp" alt="youtube"><span class="text">YouTube</span></a>
+            <a class="social" href="https://www.linkedin.com/company/preply/"><img class="icon" src="./assets/icons/linkedin.webp" alt="linkedin"><span class="text">Linkedin</span></a>
+            <a class="social" href="https://www.tiktok.com/@preplyglobal"><img class="icon" src="./assets/icons/tiktok.webp" alt="tiktok"><span class="text">TikTok</span></a>
+          </div>
+        </div>
+      </div>
+      <p>&copy; 2023 Language Courses</p>
+    </footer>
+  </body>
+</html>
